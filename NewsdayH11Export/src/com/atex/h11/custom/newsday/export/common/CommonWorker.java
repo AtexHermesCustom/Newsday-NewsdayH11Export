@@ -51,10 +51,12 @@ import org.apache.commons.net.ftp.FTPReply;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.ProcessingInstruction;
+/* 20150415 not needed right now
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.iptc.IptcDirectory;
+*/
 
 public class CommonWorker extends Commons implements Runnable {
 
@@ -646,6 +648,7 @@ public class CommonWorker extends Commons implements Runnable {
     	return image;
     }
 
+    /* 20150415 not needed right now
     public static String getIptcCopyrightNotice(String imgFilename) {
     	logger.entering("CommonWorker", "getIptcCopyrightNotice");
     	String copyright = "";
@@ -666,5 +669,6 @@ public class CommonWorker extends Commons implements Runnable {
     	
     	logger.exiting("CommonWorker", "getIptcCopyrightNotice");
     	return copyright;
-    }     
+    }
+    */     
 }

@@ -129,66 +129,8 @@ public class Worker extends CommonWorker {
 		t.transform(source, result);
 		
 		write(destObitURL, fileName, (Document) result.getNode());
-		
-    	// export photos
-    	NodeList nl = (NodeList) xp.evaluate("//item-photo", doc.getDocumentElement(), XPathConstants.NODESET);
-    	for (int i = 0; i < nl.getLength(); i++) {
-    		/*
-        	exportPhoto(nl.item(i), destPhotoURL, 
-            	props.getProperty("cropPhoto").equalsIgnoreCase("true"));
-            */
-    		// need to export the WEB variant of the photo
-    		exportPhotoWebVariant(nl.item(i), destPhotoURL);
-    	}
-		
+				
 		logger.exiting(getClass().getName(), "processDoc");
-    }
-    
-    private void exportPhotoWebVariant(Node sourceNode, URL destURL) 
-    		throws XPathExpressionException, UnsupportedEncodingException, IOException, ExportException {
-    	logger.entering(getClass().getName(), "exportPhotoWebVariant");
-    	
-		String photoFileName = getProcessingInstructionData("processing-instruction('photo-file-name')",
-				sourceNode, true);
-		String photoSourceFile = null;
-		
-		logger.info("Exporting photo file: " + photoFileName);
-		
-		// get web variant, given the master variant object id
-		int masterObjId = Integer.parseInt(getNodeData("variantOfObjId", sourceNode));
-		
-		UserHermesCfgValueClient cfg = Main.getDatasource().getUserHermesCfg();
-		
-		NCMObjectBuildProperties objProps = new NCMObjectBuildProperties();
-		objProps.setGetByObjId(true);
-		objProps.setIncludeVariants(true);		// required
-		objProps.setIncludeObjContent(true);	// required
-		
-		NCMObjectPK masterPK = new NCMObjectPK(masterObjId);
-		NCMObjectValueClient master = (NCMObjectValueClient) Main.getDatasource().getNode(masterPK, objProps);
-		if (master == null) {
-			throw new ExportException("Master variant for photo cannot be found. id=" + masterObjId);
-		}
-		short webVarType = cfg.getVariantIdByName(master.getType(), "WEB");
-		
-		// loop through variants, to find the WEB variant
-		NCMObjectValueClient[] vars = master.getVariants();
-		if (vars != null) {
-			for (NCMObjectValueClient var : vars) {
-				if (var.getVariantType() == webVarType) {
-					logger.finer("Web variant found: name=" + var.getNCMName() + ", pk=" + var.getPK().toString());
-					photoSourceFile = var.getFile().getH_ServerPath();
-					logger.finer("Web variant server path=" + photoSourceFile);
-				}
-			}
-		}
-		
-		if (photoSourceFile == null) {
-			throw new ExportException("Source path for " + photoFileName + " not found.");
-		}
-		
-		write(destURL, photoFileName, new File(photoSourceFile));    	
-    	logger.exiting(getClass().getName(), "exportPhotoWebVariant");
     }
     
 }

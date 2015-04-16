@@ -43,8 +43,7 @@ public class Worker extends CommonWorker {
     private static final Logger logger = Logger.getLogger(loggerName);      	
 	
     private Templates cachedXSLT = null;
-    private URL destObitURL = null;
-    private URL destPhotoURL = null;
+    private URL destURL = null;
     
     @Override
     public void init(AbstractQueue<QueueItem> inQ, Properties props)
@@ -62,10 +61,9 @@ public class Worker extends CommonWorker {
 	        // Prepare a transfomer.
 	        tf = TransformerFactory.newInstance();    		
     		
-	        File xsl = loadStylesheetFile(props, "transformFinalStylesheet", true);
+	        File xsl = loadStylesheetFile(props, "transformStylesheet", true);
 	        cachedXSLT = tf.newTemplates(new StreamSource(xsl)); 
-	        destObitURL = loadURL(props, "destinationURL");
-	        destPhotoURL = loadURL(props, "destinationPhotoURL");
+	        destURL = loadURL(props, "destinationURL");
     		
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -104,6 +102,7 @@ public class Worker extends CommonWorker {
 			TransformerConfigurationException, TransformerException, ParseException, ExportException {
     	logger.entering(getClass().getName(), "processDoc");
     	
+    	/*
     	String fileName = getProcessingInstructionData("processing-instruction('file-name')",
     			doc.getDocumentElement(), true);    	
     	logger.info("Exporting: " + fileName);
@@ -128,7 +127,8 @@ public class Worker extends CommonWorker {
 		t.setOutputProperty(OutputKeys.ENCODING, getEncoding());		
 		t.transform(source, result);
 		
-		write(destObitURL, fileName, (Document) result.getNode());
+		write(destURL, fileName, (Document) result.getNode());
+		*/
 				
 		logger.exiting(getClass().getName(), "processDoc");
     }

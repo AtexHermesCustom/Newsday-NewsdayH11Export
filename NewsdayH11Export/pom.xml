@@ -8,6 +8,7 @@
   <description>Newsday H11 Exports</description>
   
   <build>
+  	<finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -37,10 +38,10 @@
 		<version>2.0</version>
 	</dependency>
 	<dependency>
-		<groupId>net.sf.saxon</groupId>
+		<groupId>net.sourceforge.saxon</groupId>
 		<artifactId>saxon</artifactId>
-		<version>7.9.1</version>
-	</dependency>
+		<version>9.1.0.8</version>
+	</dependency>	
     <dependency>
     	<groupId>com.atex.h11.custom</groupId>
     	<artifactId>h11-custom-lib</artifactId>

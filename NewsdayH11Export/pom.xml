@@ -42,6 +42,11 @@
 		<artifactId>saxon</artifactId>
 		<version>9.1.0.8</version>
 	</dependency>	
+	<dependency>
+		<groupId>net.sf.saxon</groupId>
+		<artifactId>saxon-dom</artifactId>
+		<version>8.7</version>
+	</dependency>
     <dependency>
     	<groupId>com.atex.h11.custom</groupId>
     	<artifactId>h11-custom-lib</artifactId>

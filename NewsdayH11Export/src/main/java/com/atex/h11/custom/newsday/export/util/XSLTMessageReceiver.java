@@ -1,4 +1,4 @@
-package com.atex.h11.custom.newsday.export.common;
+package com.atex.h11.custom.newsday.export.util;
 
 import java.util.logging.Logger;
 import net.sf.saxon.event.PipelineConfiguration;

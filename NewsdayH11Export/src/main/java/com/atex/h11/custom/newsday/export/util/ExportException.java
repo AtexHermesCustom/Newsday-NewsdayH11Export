@@ -1,4 +1,4 @@
-package com.atex.h11.custom.newsday.export.common;
+package com.atex.h11.custom.newsday.export.util;
 
 public class ExportException extends Exception {
 	
